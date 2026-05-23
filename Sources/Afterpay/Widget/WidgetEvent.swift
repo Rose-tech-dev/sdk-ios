@@ -33,11 +33,11 @@ public enum WidgetStatus: Decodable, Equatable {
 
     if try container.decode(Bool.self, forKey: .isValid) == true {
       let amountDue = try container.decode(Money.self, forKey: .amountDueToday)
-      let checksum = try? container.decodeIfPresent(String.self, forKey: .paymentScheduleChecksum)
+      let checksum = try container.decodeIfPresent(String.self, forKey: .paymentScheduleChecksum)
 
       self = .valid(amountDueToday: amountDue, checksum: checksum)
     } else {
-      let error = try? container.decodeIfPresent(WidgetError.self, forKey: .error)
+      let error = try container.decodeIfPresent(WidgetError.self, forKey: .error)
       self = .invalid(errorCode: error?.errorCode, message: error?.message)
     }
   }
@@ -71,13 +71,13 @@ enum WidgetEvent: Decodable, Equatable {
 
     switch type {
     case .error:
-      let error = try? container.decodeIfPresent(WidgetError.self, forKey: .error)
+      let error = try container.decodeIfPresent(WidgetError.self, forKey: .error)
       self = .error(errorCode: error?.errorCode, message: error?.message)
 
     case .ready:
       let isValid = try container.decode(Bool.self, forKey: .isValid)
       let amountDue = try container.decode(Money.self, forKey: .amountDueToday)
-      let checksum = try? container.decodeIfPresent(String.self, forKey: .paymentScheduleChecksum)
+      let checksum = try container.decodeIfPresent(String.self, forKey: .paymentScheduleChecksum)
 
       self = .ready(isValid: isValid, amountDue: amountDue, checksum: checksum)
 
@@ -88,18 +88,18 @@ enum WidgetEvent: Decodable, Equatable {
 
       if valid {
         let amountDue = try container.decode(Money.self, forKey: .amountDueToday)
-        let checksum = try? container.decodeIfPresent(String.self, forKey: .paymentScheduleChecksum)
+        let checksum = try container.decodeIfPresent(String.self, forKey: .paymentScheduleChecksum)
 
         status = .valid(amountDueToday: amountDue, checksum: checksum)
       } else {
-        let error = try? container.decodeIfPresent(WidgetError.self, forKey: .error)
+        let error = try container.decodeIfPresent(WidgetError.self, forKey: .error)
 
         status = .invalid(errorCode: error?.errorCode, message: error?.message)
       }
 
       self = .change(status: status)
     case .resize:
-      let suggestedSize = try? container.decodeIfPresent(Int.self, forKey: .size)
+      let suggestedSize = try container.decodeIfPresent(Int.self, forKey: .size)
 
       self = .resize(suggestedSize: suggestedSize)
     }

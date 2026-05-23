@@ -44,4 +44,22 @@ final class WidgetStatusTests: XCTestCase {
     )
   }
 
+  // Before fix: `try?` swallowed the type-mismatch error and produced nil for
+  // checksum, silently giving wrong data instead of surfacing the server bug.
+  // After fix: the decode throws a DecodingError as expected.
+  func testChecksumTypeMismatchThrowsDecodingError() {
+    let wrongChecksumType = """
+    {
+      "isValid": true,
+      "amountDueToday": { "amount": "30.00", "currency": "USD" },
+      "paymentScheduleChecksum": 12345
+    }
+    """.data(using: .utf8)!
+
+    XCTAssertThrowsError(
+      try JSONDecoder().decode(WidgetStatus.self, from: wrongChecksumType),
+      "Expected DecodingError when checksum is a number, not a string"
+    )
+  }
+
 }
