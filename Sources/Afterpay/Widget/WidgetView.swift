@@ -240,13 +240,10 @@ public final class WidgetView: UIView, WKNavigationDelegate, WKScriptMessageHand
   /// - Parameter amount: The order total as a String. Must be in the same currency that was sent to
   /// `Afterpay.setConfiguration`.
   public func sendUpdate(amount: String) throws {
-    guard
-      let data = try? encoder.encode(Money(amount: amount, currency: configuration.currencyCode)),
-      let json = String(data: data, encoding: .utf8)
-    else {
-      return
+    let data = try encoder.encode(Money(amount: amount, currency: configuration.currencyCode))
+    guard let json = String(data: data, encoding: .utf8) else {
+      throw WidgetError.javaScriptError()
     }
-
     webView.evaluateJavaScript(#"updateAmount(\#(json))"#)
   }
 
