@@ -244,13 +244,7 @@ public func signCashAppOrderToken(
   completion: @escaping (_ result: CashAppSigningResult) -> Void
 ) {
 
-  guard let configuration = getConfiguration() else {
-    assertionFailure("Configuration must be provided before using `signCashAppOrder`")
-    completion(.failed(reason: .error(error: AfterpaySDKError.notEnabled)))
-    return
-  }
-
-  if !enabled {
+  guard let configuration = getConfiguration(), enabled else {
     completion(.failed(reason: .error(error: AfterpaySDKError.notEnabled)))
     return
   }
@@ -268,13 +262,7 @@ public func validateCashAppOrder(
   grantId: String,
   completion: @escaping (CashAppValidationResult) -> Void
 ) {
-  guard let configuration = getConfiguration() else {
-    assertionFailure("Configuration must be provided before using `validateCashAppOrder`")
-    completion(.failed(reason: .error(error: AfterpaySDKError.notEnabled)))
-    return
-  }
-
-  if !enabled {
+  guard let configuration = getConfiguration(), enabled else {
     completion(.failed(reason: .error(error: AfterpaySDKError.notEnabled)))
     return
   }

@@ -62,18 +62,18 @@ class CashAppPayCheckout {
     signingCompletion: @escaping (_ jwt: CashAppSigningResult) -> Void
   ) {
     urlSession.dataTask(with: request) { [weak self] data, response, error in
-      if error != nil {
-        signingCompletion(CashAppSigningResult.failed(reason: .error(error: error!)))
+      if let error = error {
+        signingCompletion(.failed(reason: .error(error: error)))
+        return
+      }
+
+      guard let httpResponse = response as? HTTPURLResponse else {
+        signingCompletion(.failed(reason: .responseDecodeError))
         return
       }
 
       do {
         if let data = data {
-          guard let httpResponse = response as? HTTPURLResponse else {
-            signingCompletion(CashAppSigningResult.failed(reason: .responseDecodeError))
-            return
-          }
-
           if 200...299 ~= httpResponse.statusCode {
             let decoder = JSONDecoder()
             let cashAppSigningResponse = try decoder.decode(CashAppSigningResponse.self, from: data)
