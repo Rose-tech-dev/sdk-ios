@@ -220,7 +220,7 @@ final class CheckoutV2ViewController:
     let checkout = CheckoutV2(token: token, configuration: configuration, options: options)
     // swiftlint:disable:next force_try
     let json = String(data: try! encoder.encode(checkout), encoding: .utf8)!
-    bootstrapWebView.evaluateJavaScript("openCheckout('\(json)');")
+    bootstrapWebView.evaluateJavaScript("openCheckout('\(json.escapedForJSSingleQuotedString())');")
   }
 
   private func handleError(webView: WKWebView?, error: Error) {
