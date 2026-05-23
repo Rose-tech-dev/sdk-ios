@@ -63,6 +63,8 @@ enum ApiV3 {
       case (.none, .some(let data)):
         if let error = try? Self.decoder.decode(ApiError.self, from: data) {
           completeOnMainThread(.failure(error))
+        } else {
+          completeOnMainThread(.failure(NetworkError.unexpectedResponse(urlResponse)))
         }
       case (.some(let error), _):
         completeOnMainThread(.failure(error))
