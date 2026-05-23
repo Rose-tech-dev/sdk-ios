@@ -57,6 +57,15 @@
 		5FB958E32C0E126200137468 /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB958E22C0E126200137468 /* URLSessionMock.swift */; };
 		5FBAABA02C1B3109003558AF /* CashAppPayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBAAB9F2C1B3109003558AF /* CashAppPayTests.swift */; };
 		5FEF44A22D00D64600174588 /* CheckoutV3CardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FEF44A12D00D64100174588 /* CheckoutV3CardTests.swift */; };
+		BB000001000000000000BB02 /* String+JSEscaping.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB01 /* String+JSEscaping.swift */; };
+		BB000001000000000000BB04 /* AfterpaySDKError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB03 /* AfterpaySDKError.swift */; };
+		BB000001000000000000BB06 /* JWTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB05 /* JWTTests.swift */; };
+		BB000001000000000000BB08 /* ApiV3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB07 /* ApiV3Tests.swift */; };
+		BB000001000000000000BB0A /* CashAppPayCheckoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB09 /* CashAppPayCheckoutTests.swift */; };
+		BB000001000000000000BB0C /* EnabledGuardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB0B /* EnabledGuardTests.swift */; };
+		BB000001000000000000BB0E /* StringJSEscapingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB0D /* StringJSEscapingTests.swift */; };
+		BB000001000000000000BB10 /* CheckoutV3ViewControllerRetainCycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB0F /* CheckoutV3ViewControllerRetainCycleTests.swift */; };
+		BB000001000000000000BB12 /* WidgetViewSendUpdateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB000001000000000000BB11 /* WidgetViewSendUpdateTests.swift */; };
 		6602EF0F25358A8000A0468C /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6602EF0E25358A8000A0468C /* ColorScheme.swift */; };
 		6605666324E5199500DA588E /* Locales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6605666224E5199500DA588E /* Locales.swift */; };
 		66169312257A06B200DF6CF4 /* CheckoutV2Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66169311257A06B200DF6CF4 /* CheckoutV2Message.swift */; };
@@ -209,6 +218,15 @@
 		83F7DEF7269EC4DB00F9FB75 /* OrderTotal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTotal.swift; sourceTree = "<group>"; };
 		83F7DEF9269FA8C400F9FB75 /* CheckoutV3Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutV3Card.swift; sourceTree = "<group>"; };
 		946388FD24DD077F00A1227A /* InfoWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoWebViewController.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB01 /* String+JSEscaping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+JSEscaping.swift"; sourceTree = "<group>"; };
+		BB000001000000000000BB03 /* AfterpaySDKError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterpaySDKError.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB05 /* JWTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTests.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB07 /* ApiV3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiV3Tests.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB09 /* CashAppPayCheckoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashAppPayCheckoutTests.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB0B /* EnabledGuardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnabledGuardTests.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB0D /* StringJSEscapingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringJSEscapingTests.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB0F /* CheckoutV3ViewControllerRetainCycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutV3ViewControllerRetainCycleTests.swift; sourceTree = "<group>"; };
+		BB000001000000000000BB11 /* WidgetViewSendUpdateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewSendUpdateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +260,7 @@
 				45144E7327FD11470061EBE8 /* AfterpayBundleFinder.swift */,
 				4509D35A2940192400952DAD /* JWT.swift */,
 				5F4336952C1FC46300ECD0DE /* KeyedEncodingContainerProtocol+Extensions.swift */,
+				BB000001000000000000BB01 /* String+JSEscaping.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -338,6 +357,13 @@
 				5FBAAB9F2C1B3109003558AF /* CashAppPayTests.swift */,
 				5F4336932C1FC3F700ECD0DE /* CheckoutV3RequestTests.swift */,
 				5F4336972C1FC48C00ECD0DE /* KeyedEncodingContainerProtocolExtensionTests.swift */,
+				BB000001000000000000BB05 /* JWTTests.swift */,
+				BB000001000000000000BB07 /* ApiV3Tests.swift */,
+				BB000001000000000000BB09 /* CashAppPayCheckoutTests.swift */,
+				BB000001000000000000BB0B /* EnabledGuardTests.swift */,
+				BB000001000000000000BB0D /* StringJSEscapingTests.swift */,
+				BB000001000000000000BB0F /* CheckoutV3ViewControllerRetainCycleTests.swift */,
+				BB000001000000000000BB11 /* WidgetViewSendUpdateTests.swift */,
 			);
 			path = AfterpayTests;
 			sourceTree = "<group>";
@@ -426,6 +452,7 @@
 				42927C38274209B600B26435 /* ShippingOptionUpdate.swift */,
 				42087EE627A746F700BE5442 /* MoreInfoOptions.swift */,
 				45BFEB9727ED27EF00A4AE48 /* Brand.swift */,
+				BB000001000000000000BB03 /* AfterpaySDKError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -659,6 +686,13 @@
 				5F4336942C1FC3F700ECD0DE /* CheckoutV3RequestTests.swift in Sources */,
 				4573E4B42A4D4DCB00F5CEAA /* LocaleTests.swift in Sources */,
 				5F4336982C1FC48C00ECD0DE /* KeyedEncodingContainerProtocolExtensionTests.swift in Sources */,
+				BB000001000000000000BB06 /* JWTTests.swift in Sources */,
+				BB000001000000000000BB08 /* ApiV3Tests.swift in Sources */,
+				BB000001000000000000BB0A /* CashAppPayCheckoutTests.swift in Sources */,
+				BB000001000000000000BB0C /* EnabledGuardTests.swift in Sources */,
+				BB000001000000000000BB0E /* StringJSEscapingTests.swift in Sources */,
+				BB000001000000000000BB10 /* CheckoutV3ViewControllerRetainCycleTests.swift in Sources */,
+				BB000001000000000000BB12 /* WidgetViewSendUpdateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,6 +767,8 @@
 				6605666324E5199500DA588E /* Locales.swift in Sources */,
 				83F7DEEC269E62DA00F9FB75 /* Consumer.swift in Sources */,
 				45144E7227FD10E00061EBE8 /* AfterpayAssetProvider.swift in Sources */,
+				BB000001000000000000BB02 /* String+JSEscaping.swift in Sources */,
+				BB000001000000000000BB04 /* AfterpaySDKError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

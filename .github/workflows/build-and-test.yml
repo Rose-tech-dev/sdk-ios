@@ -5,9 +5,10 @@ env:
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, fix/sdk-bugs ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
 

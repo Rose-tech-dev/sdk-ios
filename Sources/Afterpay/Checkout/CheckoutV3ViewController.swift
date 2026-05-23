@@ -222,7 +222,8 @@ final class CheckoutV3ViewController:
 
   private func performCheckoutRequest(_ completion: @escaping (URL) -> Void) {
     let request = self.createCheckoutRequest()
-    self.currentTask = ApiV3.request(self.requestHandler, request, type: CheckoutV3.Response.self) { result in
+    self.currentTask = ApiV3.request(self.requestHandler, request, type: CheckoutV3.Response.self) { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case .success(let response):
         self.token = response.token
@@ -241,7 +242,8 @@ final class CheckoutV3ViewController:
       return
     }
 
-    self.currentTask = ApiV3.request(self.requestHandler, request, type: ConfirmationV3.Response.self) { result in
+    self.currentTask = ApiV3.request(self.requestHandler, request, type: ConfirmationV3.Response.self) { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case .success(let response):
         self.dismiss(animated: true) {

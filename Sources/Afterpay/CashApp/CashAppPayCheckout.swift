@@ -31,7 +31,8 @@ class CashAppPayCheckout {
       urlString: cashAppSigningURL,
       jsonRequestBody: jsonRequestBody
     ) else {
-      return assertionFailure("Could not create signing request when handling CashApp token")
+      completion(.failed(reason: .error(error: URLError(.badURL))))
+      return
     }
 
     signPayment(request: request) { result in
@@ -40,11 +41,13 @@ class CashAppPayCheckout {
   }
 
   private static func createRequest(urlString: String, jsonRequestBody: Data?) -> URLRequest? {
-    guard let jsonRequestBody = jsonRequestBody else {
+    guard
+      let jsonRequestBody = jsonRequestBody,
+      let url = URL(string: urlString)
+    else {
       return nil
     }
 
-    let url = URL(string: urlString)!
     var request = URLRequest(url: url)
     request.setValue("application/json", forHTTPHeaderField: "Accept")
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -59,15 +62,18 @@ class CashAppPayCheckout {
     signingCompletion: @escaping (_ jwt: CashAppSigningResult) -> Void
   ) {
     urlSession.dataTask(with: request) { [weak self] data, response, error in
-      if error != nil {
-        signingCompletion(CashAppSigningResult.failed(reason: .error(error: error!)))
+      if let error = error {
+        signingCompletion(.failed(reason: .error(error: error)))
+        return
+      }
+
+      guard let httpResponse = response as? HTTPURLResponse else {
+        signingCompletion(.failed(reason: .responseDecodeError))
         return
       }
 
       do {
         if let data = data {
-          let httpResponse = response as! HTTPURLResponse
-
           if 200...299 ~= httpResponse.statusCode {
             let decoder = JSONDecoder()
             let cashAppSigningResponse = try decoder.decode(CashAppSigningResponse.self, from: data)
@@ -131,6 +137,7 @@ class CashAppPayCheckout {
     jwt: String,
     customerId: String,
     grantId: String,
+    urlSession: URLSession = .shared,
     completion: @escaping (CashAppValidationResult) -> Void
   ) {
     let requestBody: [String: Any] = [
@@ -147,7 +154,7 @@ class CashAppPayCheckout {
       return assertionFailure("Could not create signing request when handling CashApp token")
     }
 
-    URLSession.shared.dataTask(with: request) { data, response, error in
+    urlSession.dataTask(with: request) { data, response, error in
       if error != nil {
         completion(CashAppValidationResult.failed(reason: .error(error: error!)))
         return
@@ -155,7 +162,10 @@ class CashAppPayCheckout {
 
       do {
         if let data = data {
-          let httpResponse = response as! HTTPURLResponse
+          guard let httpResponse = response as? HTTPURLResponse else {
+            completion(CashAppValidationResult.failed(reason: .responseDecodeError))
+            return
+          }
           let decoder = JSONDecoder()
 
           if 200...299 ~= httpResponse.statusCode {
@@ -168,11 +178,12 @@ class CashAppPayCheckout {
             }
             return
           } else {
-            let responseError = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+            let responseError = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+            let message = responseError?["message"] as? String ?? "Unknown error"
             completion(CashAppValidationResult.failed(
               reason: .httpError(
                 errorCode: httpResponse.statusCode,
-                message: responseError?["message"] as! String
+                message: message
               )
             ))
             return

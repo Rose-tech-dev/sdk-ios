@@ -97,7 +97,7 @@ public func checkoutV3ConfirmForCashAppPay(
 ) {
   guard let configuration = configuration else {
     return assertionFailure(
-      "For fetchMerchantConfiguration to function you must provide a `configuration` object via either "
+      "For checkoutV3ConfirmForCashAppPay to function you must provide a `configuration` object via either "
       + "`Afterpay.fetchMerchantConfiguration` or `Afterpay.setV3Configuration`"
     )
   }

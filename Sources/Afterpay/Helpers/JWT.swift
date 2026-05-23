@@ -11,6 +11,7 @@ import Foundation
 internal class JWT {
   static func decode(jwtToken jwt: String) -> [String: Any] {
     let segments = jwt.components(separatedBy: ".")
+    guard segments.count > 1 else { return [:] }
     return decodeJWTPart(segments[1]) ?? [:]
   }
 
